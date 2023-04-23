@@ -13,6 +13,7 @@ struct ColorPreview: View {
 	@Binding var greeenSliderValue:Double
 	@Binding var blueSliderValue:Double
 	@Binding var opacitySliderValue:Double
+	
 	var body: some View {
 		VStack{
 			Rectangle()
@@ -23,8 +24,8 @@ struct ColorPreview: View {
 	}
 }
 
-//struct ColorPreview_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ColorPreview()
-//    }
-//}
+struct ColorPreview_Previews: PreviewProvider {
+    static var previews: some View {
+		ColorPreview(redSliderValue: .constant(25), greeenSliderValue: .constant(35), blueSliderValue: .constant(35), opacitySliderValue: .constant(35))
+    }
+}

@@ -13,23 +13,26 @@ struct ContentView: View {
 	@Environment(\.verticalSizeClass) var vSizeClass
 	
 	//MARK: State variables
-	@State var redSliderValue = 0.00
-	@State var greenSliderValue = 0.00
-	@State var blueSliderValue = 0.00
-	@State var opacitySliderValue = 0.00
-	@State var hexValue = ""
+	@State private var redSliderValue = 0.00
+	@State private var greenSliderValue = 0.00
+	@State private var blueSliderValue = 0.00
+	@State private var opacitySliderValue = 0.00
+	@State private var hexValue = ""
 	
 	var body: some View {
 		if vSizeClass == .regular && hSizeClass == .compact {
 			//Portrait orientation for mobile devices
-			PortraitView(redSliderValue: $redSliderValue, greenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue,hexValue:$hexValue).font(.title2)
+			PortraitView(redSliderValue: $redSliderValue, greenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue, hexValue:$hexValue)
+				.font(.title2)
 			
 		}else if vSizeClass == .regular && hSizeClass == .regular{
 			//Tablet view
-			PortraitView(redSliderValue: $redSliderValue, greenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue,hexValue:$hexValue).font(.title).frame(width: 850,height:850)
+			PortraitView(redSliderValue: $redSliderValue, greenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue, hexValue: $hexValue)
+				.font(.title)
+				.frame(width: 850,height: 850)
 		} else{
 			//Landscape orientation for mobile devices
-			LandscapeView(redSliderValue: $redSliderValue, greenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue,hexValue:$hexValue)
+			LandscapeView(redSliderValue: $redSliderValue, greenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue, hexValue: $hexValue)
 		}
 	}
 	

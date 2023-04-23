@@ -15,15 +15,6 @@ struct TextView: View {
 	@Binding var opacitySliderValue:Double
 	@Binding var hexValue:String
 	
-	//Checks length of input
-	func validHexCount()->Bool{
-		if(hexValue.count==3 || hexValue.count==4 || hexValue.count==6 || hexValue.count==8){
-			return false
-		}else{
-			return true
-		}
-	}
-	
 	var body: some View {
 		HStack{
 			TextField("Enter a hex value", text: $hexValue)
@@ -39,35 +30,46 @@ struct TextView: View {
 						}
 					}
 					
-				}).frame(width: 250)
+				}).frame(width: 200)
 				.border(.secondary)
-			Button("Apply",action:validateHexValue).disabled(validHexCount())
+			Button("Apply", action: validateHexValue)
+				.disabled(validHexCount())
 		}
 	}
+}
+
+struct TextView_Previews: PreviewProvider {
+	static var previews: some View {
+		TextView(redSliderValue: .constant(10), greenSliderValue: .constant(10), blueSliderValue: .constant(10), opacitySliderValue: .constant(10), hexValue: .constant("AAF"))
+	}
+}
+
+extension TextView {
+	//Checks length of input
+	func validHexCount() -> Bool {
+		if(hexValue.count == 3 || hexValue.count == 4 || hexValue.count == 6 || hexValue.count == 8){
+			return false
+		}
+		return true
+	}
+	
 	//MARK: Runs when apply button is clicked
-	func validateHexValue() {
+	private func validateHexValue() {
 		var receivedHexValue:String = hexValue
 		var newValue:String = ""
 		//turn 3-digit/4-digit hex input into equivalent 6-digit/8-digit version before passing to the converter
-		if(receivedHexValue.count == 3 || receivedHexValue.count == 4){
-			receivedHexValue.forEach{char in
+		if(receivedHexValue.count == 3 || receivedHexValue.count == 4) {
+			receivedHexValue.forEach { char in
 				newValue.append(char)
 				newValue.append(char)
 			}
 			receivedHexValue = newValue
 		}
-		var rgbaValues:(UInt8,UInt8,UInt8,UInt8)
-		rgbaValues = getRGBAColor(rgba:receivedHexValue)
+		var rgbaValues:(UInt8, UInt8, UInt8, UInt8)
+		rgbaValues = getRGBAColor(rgba: receivedHexValue)
 		redSliderValue = Double(rgbaValues.0)
 		greenSliderValue = Double(rgbaValues.1)
 		blueSliderValue = Double(rgbaValues.2)
 		opacitySliderValue = Double(rgbaValues.3)
 	}
-	
-	
 }
-//struct TextView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TextView()
-//    }
-//}
