@@ -33,12 +33,10 @@ struct LandscapeView: View {
 				.padding()
 				
 				SliderContainer(redSliderValue: $redSliderValue, greeenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue)
-				
 			}
 			.padding()
 		}
 	}
-	
 }
 struct LandscapeView_Previews: PreviewProvider {
 	static var previews: some View {

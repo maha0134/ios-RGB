@@ -17,7 +17,7 @@ struct PortraitView: View {
 	@Binding var errorMessage: String
 	
 	var body: some View {
-		VStack {
+		ScrollView {
 			if !errorMessage.isEmpty {
 				Text(errorMessage)
 					.foregroundColor(.red)
