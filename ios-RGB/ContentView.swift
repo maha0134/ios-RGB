@@ -17,22 +17,22 @@ struct ContentView: View {
 	@Environment(\.horizontalSizeClass) var hSizeClass
 	@Environment(\.verticalSizeClass) var vSizeClass
 	
-	@ObservedObject var vm = ContentViewModel()
+	@StateObject var stateValues = ContentViewModel()
 	
 	var body: some View {
 		if vSizeClass == .regular && hSizeClass == .compact {
 			//Portrait orientation for mobile devices
-			PortraitView(redSliderValue: $vm.redSliderValue, greenSliderValue: $vm.greenSliderValue, blueSliderValue: $vm.blueSliderValue, opacitySliderValue: $vm.opacitySliderValue, hexValue:$vm.hexValue, errorMessage: $vm.errorMessage)
+			PortraitView(stateValues: stateValues)
 				.font(.title2)
 			
 		} else if vSizeClass == .regular && hSizeClass == .regular {
 			//Tablet view
-			PortraitView(redSliderValue: $vm.redSliderValue, greenSliderValue: $vm.greenSliderValue, blueSliderValue: $vm.blueSliderValue, opacitySliderValue: $vm.opacitySliderValue, hexValue: $vm.hexValue, errorMessage: $vm.errorMessage)
+			PortraitView(stateValues: stateValues)
 				.font(.title)
 				.frame(width: 850,height: 850)
 		} else {
 			//Landscape orientation for mobile devices
-			LandscapeView(redSliderValue: $vm.redSliderValue, greenSliderValue: $vm.greenSliderValue, blueSliderValue: $vm.blueSliderValue, opacitySliderValue: $vm.opacitySliderValue, hexValue: $vm.hexValue, errorMessage: $vm.errorMessage)
+			LandscapeView(stateValues: stateValues)
 		}
 	}
 	

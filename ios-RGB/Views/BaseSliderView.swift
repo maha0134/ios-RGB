@@ -12,7 +12,7 @@ struct BaseSliderView: View {
 	@Binding var value: Double
 	let color: Color
 	let colorLabel: String
-	let opacityLabel: String = "Opacity"
+	private let opacityLabel: String = "Opacity"
 	
 	var label: String {
 		//change opacity label from 1-255 to 1-100%

@@ -8,31 +8,32 @@
 import SwiftUI
 
 struct ColorPreview: View {
-	//MARK: Binding variables
-	@Binding var redSliderValue: Double
-	@Binding var greeenSliderValue: Double
-	@Binding var blueSliderValue: Double
-	@Binding var opacitySliderValue: Double
+	
+	@ObservedObject var stateValues: ContentViewModel
 	
 	private var formattedString: String {
-		return String(format: "%02X", Int(redSliderValue))
-		+ String(format:"%02X", Int(greeenSliderValue))
-		+ String(format:"%02X", Int(blueSliderValue))
-		+ String(format:"%02X", Int(opacitySliderValue))
+		return String(format: "%02X", Int(stateValues.redSliderValue))
+		+ String(format:"%02X", Int(stateValues.greenSliderValue))
+		+ String(format:"%02X", Int(stateValues.blueSliderValue))
+		+ String(format:"%02X", Int(stateValues.opacitySliderValue))
 	}
 	
 	var body: some View {
 		VStack{
 			RoundedRectangle(cornerRadius: 10)
-				.fill(Color(red: redSliderValue/255, green: greeenSliderValue/255, blue: blueSliderValue/255, opacity: opacitySliderValue/255))
+				.fill(Color(red: stateValues.redSliderValue/255, green: stateValues.greenSliderValue/255, blue: stateValues.blueSliderValue/255, opacity: stateValues.opacitySliderValue/255))
+				.border(Color("ColorBlack"))
+				.shadow(radius: 5)
+				.padding(.bottom, 10)
 			
 			Text("Hex: " + formattedString)
+				.font(.headline)
 		}
 	}
 }
 
 struct ColorPreview_Previews: PreviewProvider {
 	static var previews: some View {
-		ColorPreview(redSliderValue: .constant(25), greeenSliderValue: .constant(35), blueSliderValue: .constant(35), opacitySliderValue: .constant(35))
+		ColorPreview(stateValues: ContentViewModel())
 	}
 }

@@ -8,22 +8,17 @@
 import SwiftUI
 
 struct TextView: View {
-	//MARK: Binding variables
-	@Binding var redSliderValue: Double
-	@Binding var greenSliderValue: Double
-	@Binding var blueSliderValue: Double
-	@Binding var opacitySliderValue: Double
-	@Binding var hexValue: String
-	@Binding var errorMessage: String
+	
+	@ObservedObject var stateValues: ContentViewModel
 	
 	let hexAlphabets: [Character] = ["A","B","C","D","E","F"]
 	
 	var body: some View {
 		
 		HStack{
-			TextField("Enter a hex value", text: $hexValue)
+			TextField("Enter a hex value", text: $stateValues.hexValue)
 				.textInputAutocapitalization(.characters)
-				.onChange(of: hexValue, perform: { newHexValue in
+				.onChange(of: stateValues.hexValue, perform: { newHexValue in
 					restrictInput(newHexValue: newHexValue)
 				})
 				.padding(7)
@@ -37,14 +32,18 @@ struct TextView: View {
 
 struct TextView_Previews: PreviewProvider {
 	static var previews: some View {
-		TextView(redSliderValue: .constant(10), greenSliderValue: .constant(10), blueSliderValue: .constant(10), opacitySliderValue: .constant(10), hexValue: .constant("AAF"),errorMessage: .constant(""))
+		TextView(stateValues: ContentViewModel())
 	}
 }
 
 extension TextView {
 	//Checks length of input
+	//TODO: get rid of IF statement
 	func validHexCount() -> Bool {
-		if(hexValue.count == 3 || hexValue.count == 4 || hexValue.count == 6 || hexValue.count == 8){
+		if(stateValues.hexValue.count == 3 ||
+		   stateValues.hexValue.count == 4 ||
+		   stateValues.hexValue.count == 6 ||
+		   stateValues.hexValue.count == 8) {
 			return true
 		}
 		return false
@@ -53,12 +52,12 @@ extension TextView {
 	//MARK: Runs when apply button is clicked
 	private func validateHexValue() {
 		if !validHexCount() {
-			errorMessage = "Please enter a valid Hex value"
+			stateValues.errorMessage = "Please enter a valid Hex value"
 			return
 		}
 		
-		errorMessage = ""
-		var receivedHexValue: String = hexValue
+		stateValues.errorMessage = ""
+		var receivedHexValue: String = stateValues.hexValue
 		var newValue: String = ""
 		//turn 3-digit/4-digit hex input into equivalent 6-digit/8-digit version before passing to the converter
 		if(receivedHexValue.count == 3 || receivedHexValue.count == 4) {
@@ -72,21 +71,21 @@ extension TextView {
 		
 		var rgbaValues: (UInt8, UInt8, UInt8, UInt8)
 		rgbaValues = getRGBAColor(rgba: receivedHexValue)
-		redSliderValue = Double(rgbaValues.0)
-		greenSliderValue = Double(rgbaValues.1)
-		blueSliderValue = Double(rgbaValues.2)
-		opacitySliderValue = Double(rgbaValues.3)
+		stateValues.redSliderValue = Double(rgbaValues.0)
+		stateValues.greenSliderValue = Double(rgbaValues.1)
+		stateValues.blueSliderValue = Double(rgbaValues.2)
+		stateValues.opacitySliderValue = Double(rgbaValues.3)
 	}
 	
 	private func restrictInput(newHexValue: String) {
-		hexValue = String(newHexValue.prefix(8))
-		var arrOfCharacters = [Character](hexValue)
+		stateValues.hexValue = String(newHexValue.prefix(8))
+		var arrOfCharacters = [Character](stateValues.hexValue)
 		if !arrOfCharacters.isEmpty {
 			//allow only hex characters
 			let currentCharacter = arrOfCharacters.last!
 			if(!currentCharacter.isNumber && !hexAlphabets.contains(currentCharacter)) {
 				_ = arrOfCharacters.popLast()
-				hexValue = String(arrOfCharacters)
+				stateValues.hexValue = String(arrOfCharacters)
 			}
 		}
 	}
