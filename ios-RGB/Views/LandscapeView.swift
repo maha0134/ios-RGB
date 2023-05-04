@@ -19,7 +19,7 @@ struct LandscapeView: View {
 	var body: some View {
 		ScrollView{
 			HStack{
-				VStack(alignment: .center, spacing: 20) {
+				VStack(alignment: .leading, spacing: 20) {
 					if !errorMessage.isEmpty {
 						Text(errorMessage)
 							.foregroundColor(.red)
@@ -32,7 +32,7 @@ struct LandscapeView: View {
 				}
 				.padding()
 				
-				SliderContainer(redSliderValue: $redSliderValue, greeenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue)
+				SliderContainerView(redSliderValue: $redSliderValue, greeenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue, hexValue: $hexValue, errorMessage: $errorMessage)
 			}
 			.padding()
 		}
@@ -40,6 +40,6 @@ struct LandscapeView: View {
 }
 struct LandscapeView_Previews: PreviewProvider {
 	static var previews: some View {
-		LandscapeView(redSliderValue: .constant(24), greenSliderValue: .constant(24), blueSliderValue: .constant(24), opacitySliderValue: .constant(24), hexValue: .constant("Red"), errorMessage: .constant(""))
+		LandscapeView(redSliderValue: .constant(24), greenSliderValue: .constant(24), blueSliderValue: .constant(24), opacitySliderValue: .constant(24), hexValue: .constant("AAB"), errorMessage: .constant(""))
 	}
 }

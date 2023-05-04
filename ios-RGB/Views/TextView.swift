@@ -9,18 +9,18 @@ import SwiftUI
 
 struct TextView: View {
 	//MARK: Binding variables
-	@Binding var redSliderValue:Double
-	@Binding var greenSliderValue:Double
-	@Binding var blueSliderValue:Double
-	@Binding var opacitySliderValue:Double
-	@Binding var hexValue:String
+	@Binding var redSliderValue: Double
+	@Binding var greenSliderValue: Double
+	@Binding var blueSliderValue: Double
+	@Binding var opacitySliderValue: Double
+	@Binding var hexValue: String
 	@Binding var errorMessage: String
 	
 	let hexAlphabets: [Character] = ["A","B","C","D","E","F"]
 	
 	var body: some View {
+		
 		HStack{
-			
 			TextField("Enter a hex value", text: $hexValue)
 				.textInputAutocapitalization(.characters)
 				.onChange(of: hexValue, perform: { newHexValue in

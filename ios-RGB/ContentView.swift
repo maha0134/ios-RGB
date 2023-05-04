@@ -5,6 +5,11 @@
 //  Created by AKSHAY MAHAJAN on 2023-04-17.
 //
 
+/*
+ TODO: Add keyboard focus state
+ TODO: get rid of bindings at every level
+ TODO: add padding under text view
+ */
 import SwiftUI
 
 struct ContentView: View {
