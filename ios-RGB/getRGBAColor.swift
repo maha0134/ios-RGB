@@ -8,7 +8,7 @@
 import Foundation
 
 //MARK: Converts String to Hex values
-func getRGBAColor(rgba: String) -> (UInt8,UInt8,UInt8,UInt8){
+func getRGBAColor(rgba: String) -> (UInt8,UInt8,UInt8,UInt8) {
 	
 	var red: UInt8 = 0
 	var green: UInt8 = 0

@@ -22,11 +22,13 @@ struct PortraitView: View {
 				Text(errorMessage)
 					.foregroundColor(.red)
 			}
+			Spacer()
 			TextView(redSliderValue: $redSliderValue, greenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue, hexValue:$hexValue, errorMessage: $errorMessage)
 				.padding(.bottom, 20)
 			
 			ColorPreview(redSliderValue: $redSliderValue, greeenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue)
 				.frame(width: 200, height: 200)
+				.shadow(radius: 5)
 			
 			SliderContainerView(redSliderValue: $redSliderValue, greeenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue, hexValue: $hexValue, errorMessage: $errorMessage)
 		}

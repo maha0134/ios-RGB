@@ -10,8 +10,18 @@ import SwiftUI
 struct BaseSliderView: View {
 	//MARK: Variables
 	@Binding var value: Double
-	var color: Color
-	var colorLabel: String
+	let color: Color
+	let colorLabel: String
+	let opacityLabel: String = "Opacity"
+	
+	var label: String {
+		//change opacity label from 1-255 to 1-100%
+		if colorLabel == opacityLabel {
+			return String(format:"%.0f", (value * 100) / 255)
+		}
+		
+		return String(format: "%.0f", value)
+	}
 	
 	var body: some View {
 		VStack{
@@ -20,14 +30,9 @@ struct BaseSliderView: View {
 				   step: 1,
 				   label:{})
 			.tint(color)
-			//change opacity label from 1-255 to 1-100%
-			if(colorLabel == "Opacity"){
-				Text("\(colorLabel): \(String(format:"%.0f",value*100/255))%")
-					.foregroundColor(color)
-			} else {
-				Text("\(colorLabel): \(String(format:"%.0f",value))")
-					.foregroundColor(color)
-			}
+			
+			Text("\(colorLabel): \(self.label)")
+				.foregroundColor(color)
 		}
 	}
 }

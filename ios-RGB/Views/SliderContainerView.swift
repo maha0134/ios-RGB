@@ -18,10 +18,11 @@ struct SliderContainerView: View {
 	
 	var body: some View {
 		VStack{
+			//can loop over using a Tuple or enum, but this gives more control for the limited use case and is readable and concise
 			BaseSliderView(value: $redSliderValue, color: .red, colorLabel: "Red")
 			BaseSliderView(value: $greeenSliderValue, color: .green, colorLabel: "Green")
 			BaseSliderView(value: $blueSliderValue, color: .blue, colorLabel: "Blue")
-			BaseSliderView(value: $opacitySliderValue, color: .black, colorLabel: "Opacity")
+			BaseSliderView(value: $opacitySliderValue, color: Color("SliderColorBlack"), colorLabel: "Opacity")
 			
 			Button("Reset") {
 				redSliderValue=0.00

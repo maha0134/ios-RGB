@@ -23,9 +23,8 @@ struct ColorPreview: View {
 	
 	var body: some View {
 		VStack{
-			Rectangle()
+			RoundedRectangle(cornerRadius: 10)
 				.fill(Color(red: redSliderValue/255, green: greeenSliderValue/255, blue: blueSliderValue/255, opacity: opacitySliderValue/255))
-				.border(.secondary)
 			
 			Text("Hex: " + formattedString)
 		}
