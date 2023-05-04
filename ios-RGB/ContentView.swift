@@ -12,28 +12,22 @@ struct ContentView: View {
 	@Environment(\.horizontalSizeClass) var hSizeClass
 	@Environment(\.verticalSizeClass) var vSizeClass
 	
-	//MARK: State variables
-	@State private var redSliderValue = 0.0
-	@State private var greenSliderValue = 0.0
-	@State private var blueSliderValue = 0.0
-	@State private var opacitySliderValue = 255.0
-	@State private var hexValue = ""
-	@State private var errorMessage = ""
+	@ObservedObject var vm = ContentViewModel()
 	
 	var body: some View {
 		if vSizeClass == .regular && hSizeClass == .compact {
 			//Portrait orientation for mobile devices
-			PortraitView(redSliderValue: $redSliderValue, greenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue, hexValue:$hexValue, errorMessage: $errorMessage)
+			PortraitView(redSliderValue: $vm.redSliderValue, greenSliderValue: $vm.greenSliderValue, blueSliderValue: $vm.blueSliderValue, opacitySliderValue: $vm.opacitySliderValue, hexValue:$vm.hexValue, errorMessage: $vm.errorMessage)
 				.font(.title2)
 			
 		} else if vSizeClass == .regular && hSizeClass == .regular {
 			//Tablet view
-			PortraitView(redSliderValue: $redSliderValue, greenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue, hexValue: $hexValue, errorMessage: $errorMessage)
+			PortraitView(redSliderValue: $vm.redSliderValue, greenSliderValue: $vm.greenSliderValue, blueSliderValue: $vm.blueSliderValue, opacitySliderValue: $vm.opacitySliderValue, hexValue: $vm.hexValue, errorMessage: $vm.errorMessage)
 				.font(.title)
 				.frame(width: 850,height: 850)
 		} else {
 			//Landscape orientation for mobile devices
-			LandscapeView(redSliderValue: $redSliderValue, greenSliderValue: $greenSliderValue, blueSliderValue: $blueSliderValue, opacitySliderValue: $opacitySliderValue, hexValue: $hexValue, errorMessage: $errorMessage)
+			LandscapeView(redSliderValue: $vm.redSliderValue, greenSliderValue: $vm.greenSliderValue, blueSliderValue: $vm.blueSliderValue, opacitySliderValue: $vm.opacitySliderValue, hexValue: $vm.hexValue, errorMessage: $vm.errorMessage)
 		}
 	}
 	

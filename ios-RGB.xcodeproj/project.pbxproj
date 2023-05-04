@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A49B7DF2A03F5EE002F3EEB /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A49B7DE2A03F5EE002F3EEB /* ContentViewModel.swift */; };
 		4A7B5AF429EDBD8C00A9502B /* ios_RGBApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7B5AF329EDBD8C00A9502B /* ios_RGBApp.swift */; };
 		4A7B5AF629EDBD8C00A9502B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7B5AF529EDBD8C00A9502B /* ContentView.swift */; };
 		4A7B5AF829EDBD8D00A9502B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A7B5AF729EDBD8D00A9502B /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A49B7DE2A03F5EE002F3EEB /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		4A7B5AF029EDBD8C00A9502B /* ios-RGB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-RGB.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A7B5AF329EDBD8C00A9502B /* ios_RGBApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_RGBApp.swift; sourceTree = "<group>"; };
 		4A7B5AF529EDBD8C00A9502B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +48,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A49B7DD2A03F5D8002F3EEB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4A49B7DE2A03F5EE002F3EEB /* ContentViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		4A7B5AE729EDBD8C00A9502B = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +75,7 @@
 		4A7B5AF229EDBD8C00A9502B /* ios-RGB */ = {
 			isa = PBXGroup;
 			children = (
+				4A49B7DD2A03F5D8002F3EEB /* ViewModels */,
 				4A7B5B0129EDBD9E00A9502B /* Views */,
 				4A7B5AF329EDBD8C00A9502B /* ios_RGBApp.swift */,
 				4A7B5AF529EDBD8C00A9502B /* ContentView.swift */,
@@ -170,6 +181,7 @@
 				4A7B5B0529EDBDC900A9502B /* SliderContainerView.swift in Sources */,
 				4A7B5AF429EDBD8C00A9502B /* ios_RGBApp.swift in Sources */,
 				4A7B5B0329EDBDBC00A9502B /* BaseSliderView.swift in Sources */,
+				4A49B7DF2A03F5EE002F3EEB /* ContentViewModel.swift in Sources */,
 				4A7B5B0D29EDBDEF00A9502B /* LandscapeView.swift in Sources */,
 				4A7B5B0F29EDBE9000A9502B /* getRGBAColor.swift in Sources */,
 				4A7B5B0929EDBDE100A9502B /* ColorPreview.swift in Sources */,
