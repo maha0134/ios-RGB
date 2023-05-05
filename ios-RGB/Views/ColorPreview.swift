@@ -20,10 +20,13 @@ struct ColorPreview: View {
 	
 	var body: some View {
 		VStack{
-			RoundedRectangle(cornerRadius: 10)
+			RoundedRectangle(cornerRadius: 5)
 				.fill(Color(red: stateValues.redSliderValue/255, green: stateValues.greenSliderValue/255, blue: stateValues.blueSliderValue/255, opacity: stateValues.opacitySliderValue/255))
-				.border(Color("ColorBlack"))
 				.shadow(radius: 5)
+				.overlay(
+					RoundedRectangle(cornerRadius: 5)
+						.stroke(Color("ColorBlack"))
+				)
 				.padding(.bottom, 10)
 			
 			Text("Hex: " + formattedString)
