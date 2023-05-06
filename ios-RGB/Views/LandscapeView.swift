@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct LandscapeView: View {
-
+	
 	@ObservedObject var stateValues: ContentViewModel
+	@FocusState var focused
 	
 	var body: some View {
-		ScrollView{
-			HStack{
+		ScrollView {
+			HStack {
 				VStack(alignment: .leading, spacing: 20) {
 					if !stateValues.errorMessage.isEmpty {
 						Text(stateValues.errorMessage)
 							.foregroundColor(.red)
 					}
-					TextView(stateValues: stateValues)
+					TextView(stateValues: stateValues, focused: _focused)
 						.font(.title2)
 					
 					ColorPreview(stateValues: stateValues)

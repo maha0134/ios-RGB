@@ -10,6 +10,7 @@ import SwiftUI
 struct PortraitView: View {
 
 	@ObservedObject var stateValues: ContentViewModel
+	@FocusState var focused
 	
 	var body: some View {
 		ScrollView {
@@ -20,7 +21,7 @@ struct PortraitView: View {
 			
 			Spacer()
 			
-			TextView(stateValues: stateValues)
+			TextView(stateValues: stateValues, focused: _focused)
 				.padding(.bottom, 20)
 			
 			ColorPreview(stateValues: stateValues)

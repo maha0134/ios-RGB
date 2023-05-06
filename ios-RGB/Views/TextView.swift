@@ -10,6 +10,7 @@ import SwiftUI
 struct TextView: View {
 	
 	@ObservedObject var stateValues: ContentViewModel
+	@FocusState var focused
 	
 	let hexAlphabets: [Character] = ["A","B","C","D","E","F"]
 	
@@ -21,6 +22,7 @@ struct TextView: View {
 				.onChange(of: stateValues.hexValue, perform: { newHexValue in
 					restrictInput(newHexValue: newHexValue)
 				})
+				.focused($focused)
 				.padding(7)
 				.frame(width: 200)
 				.border(.secondary)
@@ -55,7 +57,7 @@ extension TextView {
 			stateValues.errorMessage = "Please enter a valid Hex value"
 			return
 		}
-		
+		focused = false
 		stateValues.errorMessage = ""
 		var receivedHexValue: String = stateValues.hexValue
 		var newValue: String = ""
