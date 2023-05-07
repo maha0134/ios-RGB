@@ -5,9 +5,6 @@
 //  Created by AKSHAY MAHAJAN on 2023-04-17.
 //
 
-/*
- TODO: Add keyboard focus state
- */
 import SwiftUI
 
 struct ContentView: View {
@@ -29,7 +26,7 @@ struct ContentView: View {
 				//Tablet view
 				PortraitView(stateValues: stateValues, focused: _focused)
 					.font(.title)
-					.frame(width: 850,height: 850)
+					.frame(width: 850, height: 850)
 			} else {
 				//Landscape orientation for mobile devices
 				LandscapeView(stateValues: stateValues, focused: _focused)

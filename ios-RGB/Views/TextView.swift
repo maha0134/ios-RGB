@@ -12,22 +12,28 @@ struct TextView: View {
 	@ObservedObject var stateValues: ContentViewModel
 	@FocusState var focused
 	
-	let hexAlphabets: [Character] = ["A","B","C","D","E","F"]
-	
 	var body: some View {
 		
 		HStack{
 			TextField("Enter a hex value", text: $stateValues.hexValue)
 				.textInputAutocapitalization(.characters)
 				.onChange(of: stateValues.hexValue, perform: { newHexValue in
-					restrictInput(newHexValue: newHexValue)
+					if !newHexValue.isEmpty {
+						restrictInput(newHexValue: newHexValue)
+					}
 				})
 				.focused($focused)
 				.padding(7)
 				.frame(width: 200)
 				.border(.secondary)
-
-			Button("Apply", action: validateHexValue)
+			
+			Button("Apply") {
+				if !stateValues.hexValue.isEmpty {
+					validateHexValue()
+				} else {
+					stateValues.errorMessage = "Please enter a Hex value"
+				}
+			}
 		}
 	}
 }
@@ -40,15 +46,10 @@ struct TextView_Previews: PreviewProvider {
 
 extension TextView {
 	//Checks length of input
-	//TODO: get rid of IF statement
 	func validHexCount() -> Bool {
-		if(stateValues.hexValue.count == 3 ||
-		   stateValues.hexValue.count == 4 ||
-		   stateValues.hexValue.count == 6 ||
-		   stateValues.hexValue.count == 8) {
-			return true
-		}
-		return false
+		let validHexCount = [3, 4, 6, 8]
+		//Only allow a valid hex value count
+		return  validHexCount.contains(stateValues.hexValue.count)
 	}
 	
 	//MARK: Runs when apply button is clicked
@@ -62,11 +63,10 @@ extension TextView {
 		var receivedHexValue: String = stateValues.hexValue
 		var newValue: String = ""
 		//turn 3-digit/4-digit hex input into equivalent 6-digit/8-digit version before passing to the converter
-		if(receivedHexValue.count == 3 || receivedHexValue.count == 4) {
+		if receivedHexValue.count == 3 || receivedHexValue.count == 4 {
 			receivedHexValue.forEach { char in
-				for _ in 0...1 {
-					newValue.append(char)
-				}
+				//Repeat each character and add to the String
+				newValue += "\(char)\(char)"
 			}
 			receivedHexValue = newValue
 		}
@@ -80,15 +80,16 @@ extension TextView {
 	}
 	
 	private func restrictInput(newHexValue: String) {
+		let hexAlphabets: [Character] = ["A", "B", "C", "D", "E", "F"]
 		stateValues.hexValue = String(newHexValue.prefix(8))
-		var arrOfCharacters = [Character](stateValues.hexValue)
-		if !arrOfCharacters.isEmpty {
-			//allow only hex characters
-			let currentCharacter = arrOfCharacters.last!
-			if(!currentCharacter.isNumber && !hexAlphabets.contains(currentCharacter)) {
-				_ = arrOfCharacters.popLast()
-				stateValues.hexValue = String(arrOfCharacters)
-			}
+		
+		guard let lastAlphabet = stateValues.hexValue.last else {
+			return
+		}
+		//Check the last entered character to be valid HEX digit
+		if !hexAlphabets.contains(lastAlphabet) &&
+			!lastAlphabet.isNumber {
+			stateValues.hexValue.removeLast()
 		}
 	}
 }
