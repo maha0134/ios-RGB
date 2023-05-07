@@ -34,6 +34,7 @@ struct ContentView: View {
 		}
 		.onTapGesture {
 			focused = false
+			stateValues.errorMessage = ""
 		}
 	}
 	

@@ -14,11 +14,13 @@ struct TextView: View {
 	
 	var body: some View {
 		
-		HStack{
+		HStack {
 			TextField("Enter a hex value", text: $stateValues.hexValue)
 				.textInputAutocapitalization(.characters)
+				.autocorrectionDisabled()
 				.onChange(of: stateValues.hexValue, perform: { newHexValue in
 					if !newHexValue.isEmpty {
+						stateValues.errorMessage = ""
 						restrictInput(newHexValue: newHexValue)
 					}
 				})
@@ -27,13 +29,10 @@ struct TextView: View {
 				.frame(width: 200)
 				.border(.secondary)
 			
-			Button("Apply") {
-				if !stateValues.hexValue.isEmpty {
-					validateHexValue()
-				} else {
-					stateValues.errorMessage = "Please enter a Hex value"
-				}
-			}
+			Button("Apply", action: valueSubmitted)
+		}
+		.onSubmit {
+			valueSubmitted()
 		}
 	}
 }
@@ -46,7 +45,7 @@ struct TextView_Previews: PreviewProvider {
 
 extension TextView {
 	//Checks length of input
-	func validHexCount() -> Bool {
+	private func validHexCount() -> Bool {
 		let validHexCount = [3, 4, 6, 8]
 		//Only allow a valid hex value count
 		return  validHexCount.contains(stateValues.hexValue.count)
@@ -60,7 +59,7 @@ extension TextView {
 		}
 		focused = false
 		stateValues.errorMessage = ""
-		var receivedHexValue: String = stateValues.hexValue
+		var receivedHexValue = stateValues.hexValue
 		var newValue: String = ""
 		//turn 3-digit/4-digit hex input into equivalent 6-digit/8-digit version before passing to the converter
 		if receivedHexValue.count == 3 || receivedHexValue.count == 4 {
@@ -90,6 +89,14 @@ extension TextView {
 		if !hexAlphabets.contains(lastAlphabet) &&
 			!lastAlphabet.isNumber {
 			stateValues.hexValue.removeLast()
+		}
+	}
+	
+	private func valueSubmitted() {
+		if !stateValues.hexValue.isEmpty {
+			validateHexValue()
+		} else {
+			stateValues.errorMessage = "Please enter a Hex value"
 		}
 	}
 }
