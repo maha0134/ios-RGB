@@ -18,12 +18,12 @@ struct TextView: View {
 			TextField("Enter a hex value", text: $stateValues.hexValue)
 				.textInputAutocapitalization(.characters)
 				.autocorrectionDisabled()
-				.onChange(of: stateValues.hexValue, perform: { newHexValue in
+				.onChange(of: stateValues.hexValue) { newHexValue in
 					if !newHexValue.isEmpty {
 						stateValues.errorMessage = ""
 						restrictInput(newHexValue: newHexValue)
 					}
-				})
+				}
 				.focused($focused)
 				.padding(7)
 				.frame(width: 200)
